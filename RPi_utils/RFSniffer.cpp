@@ -9,6 +9,7 @@
 #include "RCSwitch.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
      
      
 RCSwitch mySwitch;
@@ -30,7 +31,7 @@ int main(int argc, char *argv[]) {
      
     
      while(1) {
-  
+      usleep(5000);
       if (mySwitch.available()) {
     
         int value = mySwitch.getReceivedValue();
@@ -39,7 +40,8 @@ int main(int argc, char *argv[]) {
           printf("Unknown encoding");
         } else {    
    
-          printf("Received %i\n", mySwitch.getReceivedValue() );
+          fprintf(stdout,"%i\n", mySwitch.getReceivedValue() );
+          fflush(stdout);
         }
     
         mySwitch.resetAvailable();
